@@ -10,7 +10,7 @@ module.exports = (app) => {
 	}));
 
 	app.get('/', (req, res) => {
-		res.send('Home Page');
+		res.send('This is the Home Page');
 	})
 
 	app.get('/auth/twitter',
