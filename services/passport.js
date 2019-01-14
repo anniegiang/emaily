@@ -18,7 +18,8 @@ passport.deserializeUser((id, done) => {
 passport.use(new TwitterStrategy({
     consumerKey: keys.TwitterConsumerKey,
     consumerSecret: keys.TwitterConsumerSecret,
-    callbackURL: "http://localhost:3000/auth/twitter/callback"
+    callbackURL: "/auth/twitter/callback",
+    proxy: true
   },
   (accessToken, refreshToken, profile, done) => {
   	User.findOne({ twitterID: profile.id }).then(existingUser => {
