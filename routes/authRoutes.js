@@ -9,10 +9,6 @@ module.exports = (app) => {
 	    saveUninitialized: true
 	}));
 
-	app.get('/', (req, res) => {
-		res.send('This is the Home Page');
-	})
-
 	app.get('/auth/twitter',
 	  passport.authenticate('twitter'));
 
