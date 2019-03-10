@@ -21,16 +21,12 @@ passport.use(new TwitterStrategy({
     callbackURL: "/auth/twitter/callback",
     proxy: true
   },
-  (accessToken, refreshToken, profile, done) => {
-  	User.findOne({ twitterID: profile.id }).then(existingUser => {
-  		if(existingUser) {
-  			done(null, existingUser);
-  		} else {
-  			new User({ twitterID: profile.id })
-  			.save()
-  			.then(user => done(null, user));
-  		}
-  	})
-    
+  async (accessToken, refreshToken, profile, done) => {
+  	const existingUser = await User.findOne({ twitterID: profile.id })
+		if(existingUser) {
+			return done(null, existingUser);
+		}
+		const user = await new User({ twitterID: profile.id }).save()
+		done(null, user);		
   }
 ));
